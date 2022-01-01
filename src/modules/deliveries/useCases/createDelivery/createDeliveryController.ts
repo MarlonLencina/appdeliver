@@ -15,6 +15,8 @@ export class CreateDeliveryController {
         id_client
     })
 
+    console.log(req.id_client)
+
     res.json({
         message: "delivery was created",
         result 
