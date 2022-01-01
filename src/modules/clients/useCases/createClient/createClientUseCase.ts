@@ -1,7 +1,7 @@
 import { ICreateClient } from "../../dtos/ICreateClient";
 import { prisma } from "../../../../database/prismaClient";
 import { AppError } from "../../../../shared/error/AppError";
-import { hash } from "bcrypt";
+import { hash } from "bcryptjs";
 
 
 export class CreateClientUseCase {

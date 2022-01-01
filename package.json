@@ -7,13 +7,15 @@
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/shared/infra/http/server"
   },
   "dependencies": {
-    "@prisma/client": "^3.7.0",
+    "@prisma/client": "3.6.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^8.5.6",
     "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
-    "prisma": "^3.7.0"
+    "prisma": "3.6.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

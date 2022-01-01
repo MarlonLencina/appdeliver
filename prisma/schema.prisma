@@ -31,12 +31,16 @@ model clients {
 }
 
 model deliveries {
-  id              String      @id @default(uuid())
+  id              String       @id @default(uuid())
+  
+  client          clients      @relation(fields: [id_client], references: [id])
   id_client       String
-  client          clients     @relation(fields: [id_client], references: [id])
-  id_delivery_man String
-  delivery_man    deliveryMan @relation(fields: [id_delivery_man], references: [id])
+  
+  delivery_man    deliveryMan? @relation(fields: [id_delivery_man], references: [id])
+  id_delivery_man String?
+  
   item_name       String
-  create_at       DateTime    @default(now())
-  end_at          DateTime
+  
+  created_at       DateTime     @default(now())
+  end_at          DateTime?    
 }

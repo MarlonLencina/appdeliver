@@ -1,8 +1,8 @@
-import { compare } from "bcrypt"
-import { prisma } from "../../../database/prismaClient"
-import { AppError } from "../../../shared/error/AppError"
+import { compare } from "bcryptjs"
+import { prisma } from "../../../../database/prismaClient"
+import { AppError } from "../../../../shared/error/AppError"
 import { sign } from "jsonwebtoken"
-import auth from "../../../config/auth"
+import auth from "../../../../config/auth"
 
 interface IRequest {
     username: string
@@ -35,7 +35,7 @@ export class AuthenticateUserClientUseCase {
 
         const token = sign({
             username: lowerCaseUsername
-        }, auth.JWT_secret, {
+        }, auth.JWT_client_secret, {
             subject: userExist.id,
             expiresIn: "1d"
         })
