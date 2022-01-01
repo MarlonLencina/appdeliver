@@ -6,32 +6,27 @@ import { hash } from "bcrypt";
 
 export class CreateClientUseCase {
 
-
-
     public async execute({username, password}: ICreateClient) {
-        //validate if user already exist
+
+        const toLowerCaseUsername = username.toLowerCase()
 
         const userExist = await prisma.clients.findFirst({
             where: {
-                username: {
-                    mode: "insensitive"
-                }
+                username: toLowerCaseUsername
             }
         })
+
+        console.log(userExist)
 
         if(userExist){ 
             throw new AppError("Username already exist.", 401)
         }
 
-        //criptography user`s password
-
         const encryptedPass = await hash(password, 10)
-
-        //salvar user
 
         const user = await prisma.clients.create({
             data: {
-                username,
+                username: toLowerCaseUsername,
                 password: encryptedPass
             }
         })
