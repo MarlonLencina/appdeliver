@@ -1,16 +1,32 @@
-
 import { Router } from "express";
 import { ensureAuthenticatedClient } from "../middleware/ensureAuthenticatedClient";
 import { CreateDeliveryController } from "../../../../modules/deliveries/useCases/createDelivery/createDeliveryController";
 import { FindAllAvailableController } from "../../../../modules/deliveries/useCases/findAllAvailable/findAllAvailableController";
+import { ensureAuthenticatedDeliveryMan } from "../middleware/ensureAuthenticatedDeliveryMan";
+import { UpdateEndDateController } from "../../../../modules/deliveries/useCases/updateEndDate/updateEndDateController";
 
-const deliveryRouter = Router()
+const deliveryRouter = Router();
 
-const createDeliveryController = new CreateDeliveryController()
-const findAllAvailableController = new FindAllAvailableController()
+const createDeliveryController = new CreateDeliveryController();
+const findAllAvailableController = new FindAllAvailableController();
+const updateEndDateController = new UpdateEndDateController();
 
-deliveryRouter.post('/', ensureAuthenticatedClient, createDeliveryController.handle)
+deliveryRouter.put(
+  "/:id",
+  ensureAuthenticatedDeliveryMan,
+  updateEndDateController.handle
+);
 
-deliveryRouter.get('/', ensureAuthenticatedClient, findAllAvailableController.handle)
+deliveryRouter.post(
+  "/",
+  ensureAuthenticatedClient,
+  createDeliveryController.handle
+);
 
-export { deliveryRouter }
+deliveryRouter.get(
+  "/",
+  ensureAuthenticatedClient,
+  findAllAvailableController.handle
+);
+
+export { deliveryRouter };
